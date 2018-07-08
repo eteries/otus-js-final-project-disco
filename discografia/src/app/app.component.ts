@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Discografia App - Music collection manager';
+    title = 'Discografia App - Music collection manager';
+
+    constructor() {
+
+    }
 }

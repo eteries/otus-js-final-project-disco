@@ -1,3 +1,12 @@
 //$primary:       red;
 @import "assets/theme";
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+.form-wrapper {
+  max-width: 500px;
+}
+
+::selection {
+  background: #272B30;
+  color: white;
+}

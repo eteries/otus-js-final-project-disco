@@ -1,0 +1,13 @@
+<ng-container>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Welcome</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <p><button type="button" class="btn btn-block btn-secondary" (click)="goAddAlbum()">Add an album</button></p>
+    <p><button type="button" class="btn btn-block btn-secondary" (click)="goAddSong()">Add a song</button></p>
+    <p><button type="button" class="btn btn-block btn-secondary">Find song at the database</button></p>
+  </div>
+</ng-container>

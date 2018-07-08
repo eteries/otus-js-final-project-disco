@@ -1,0 +1,14 @@
+.song-list {
+  list-style: none;
+  padding: 0;
+}
+
+.song-list-row {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.action-checkbox {
+  margin-right: 15px;
+}
