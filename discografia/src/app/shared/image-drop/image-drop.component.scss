@@ -1,0 +1,26 @@
+::ng-deep .preview {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+}
+
+::ng-deep .image-drop  {
+  border: 1px dashed white;
+  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+}
+
+::ng-deep .image-drop .content.content {
+  color: white;
+}
+
+.preview-container {
+  position: relative;
+}
+
+.button-reset {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

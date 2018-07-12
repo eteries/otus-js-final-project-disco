@@ -1,0 +1,10 @@
+<div class="center">
+  <ng-container *ngIf="!isLoaded">
+    <file-drop headertext="Drop a disc's cover here" (onFileDrop)="dropped($event)"
+                [customstyle]="'image-drop'">
+    </file-drop>
+  </ng-container>
+  <div class="preview-container" [hidden]="!isLoaded">
+    <button type="button" (click)="reset()" class="btn btn-sm btn-danger button-reset">&times;</button>
+  </div>
+</div>

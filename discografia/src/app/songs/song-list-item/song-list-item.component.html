@@ -1,0 +1,13 @@
+
+<td>{{ song.artist }}</td>
+<td>{{ song.title }}</td>
+<td>{{ song.album }}</td>
+<td>{{ song.year }}</td>
+<td>
+  <ng-container *ngIf="song.youtube">
+    <button class="btn btn-sm btn-play" type="button" (click)="open(song.youtube, song.title, song.artist)">🎵‍</button>
+  </ng-container>
+</td>
+<td>
+  <button class="btn btn-sm" type="button" [routerLink]="['/song/edit', song.id]">Edit</button>
+</td>

@@ -1,0 +1,19 @@
+.albums-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 20px;
+    position: relative;
+  }
+}
+
+input {
+  outline: 5px solid #32383e;
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+  z-index: 2;
+}

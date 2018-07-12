@@ -1,0 +1,17 @@
+<ng-container *ngIf="albumsViews && albumsViews.length; else initial">
+  <form #albumsListForm="ngForm" (ngSubmit)="onSubmit(albumsListForm)">
+    <ul class="albums-list">
+      <li *ngFor="let album of albumsViews | textFilter: search">
+        <div class="song-list-item">
+          <input type="checkbox" name="{{album.id}}" class="action-checkbox" [(ngModel)]="checked[album.id]" (change)="toggleItem(album.id)">
+          <albums-list-item [album]="album"></albums-list-item>
+        </div>
+      </li>
+    </ul>
+    <div><button type="submit" class="btn btn-outline-light btn-sm">Delete</button></div>
+  </form>
+</ng-container>
+<ng-template #initial>
+  <p>There's no albums here yet.</p>
+</ng-template>
+
