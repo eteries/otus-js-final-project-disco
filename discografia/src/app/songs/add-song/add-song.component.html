@@ -1,0 +1,60 @@
+<div class="container">
+  <h2 *ngIf="!isEditMode()">Add a new song</h2>
+  <h2 *ngIf="isEditMode()">Edit the song</h2>
+  <div class="form-wrapper">
+    <form #addSongForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off"><br>
+      <div class="form-row form-group">
+        <div class="col-sm-4">
+          <label for="title" class="col-form-label">Title</label>
+        </div>
+        <div class="col-sm-8">
+          <input id="title" name="title" class="form-control" required
+                 placeholder="Title"
+                 [(ngModel)]="model.title" #title="ngModel"/>
+        </div>
+      </div>
+      <div class="form-row form-group">
+        <div class="col-sm-4">
+          <label for="artist" class="col-form-label">Artist</label>
+        </div>
+        <div class="col-sm-8">
+          <input id="artist" name="artist" required placeholder="Artist" #artist="ngModel" class="form-control"
+                 [(ngModel)]="currentArtist.artist" (change)="handleArtistInput($event.target.value)" />
+        </div>
+      </div>
+      <div class="form-row form-group">
+        <div class="col-sm-4">
+          <label class="col-form-label">Album</label>
+        </div>
+        <div class="col-sm-8">
+          <select name="album" class="form-control" [(ngModel)]="model.albumId">
+            <option value="">Select an album or leave blank</option>
+            <option *ngFor="let album of currentArtist?.albums" value="{{album.albumId}}">{{album.title}}</option>
+          </select>
+          <div class="text-right"><a href [routerLink]="['/album/add']">Add the album first</a></div>
+        </div>
+      </div>
+      <div class="form-row form-group" *ngIf="model.albumId">
+        <div class="col-sm-4">
+          <label class="col-form-label">Track No.</label>
+        </div>
+        <div class="col-sm-8">
+          <input name="track" [(ngModel)]="model.track" type="number" class="form-control half">
+        </div>
+      </div>
+      <div class="form-row form-group">
+        <div class="col-sm-4">
+          <label class="col-form-label">Youtube ID</label>
+        </div>
+        <div class="col-sm-8">
+          <input name="youtube" [(ngModel)]="model.youtube" class="form-control half">
+        </div>
+      </div>
+      <button type="submit" [disabled]="!addSongForm.form.valid" class="btn btn-outline-light">Save</button>
+      <div class="alert-container">
+        <alert-selfclosing [message]="'The song has been added to your collection'"
+                           [isActive]="showConfirm"></alert-selfclosing>
+      </div>
+    </form>
+  </div>
+</div>

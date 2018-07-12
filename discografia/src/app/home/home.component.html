@@ -1,10 +1,33 @@
-<div class="jumbotron">
+<div class="jumbotron" *ngIf="isEmpty">
   <h1 class="display-3">Keep track on your favorite songs</h1>
   <p class="lead">This app helps your to keep your music collection organized.</p>
   <p>
     <button class="btn btn-primary btn-lg" role="button" (click)="open()">Get started</button>
   </p>
 </div>
-<div class="container">
-  <songs-list></songs-list>
+<div class="jumbotron" *ngIf="!isEmpty">
+    <button class="btn btn-primary btn-lg" [routerLink]="['album/add']">Add an album</button>
+    <button class="btn btn-primary btn-lg" [routerLink]="['song/add']">Add a song</button>
+</div>
+<div class="container" *ngIf="!isEmpty">
+  <div class="row">
+    <div class="col-md-9">
+      <songs-list [search]="search" *ngIf="view === 'songs'"></songs-list>
+      <albums-list [search]="search" *ngIf="view === 'albums'"></albums-list>
+    </div>
+    <div class="col-md-3">
+      <div class="view-menu">
+        View: <button class="btn btn-link" (click)="view='songs'" [ngClass]="{'disabled': view==='songs'}">Songs</button> /
+        <button class="btn btn-link" (click)="view='albums'" [ngClass]="{'disabled': view==='albums'}">Albums</button>
+      </div>
+      <p>
+        <label>Instant Search:</label><br>
+        <input [(ngModel)]="search" placeholder="Artist, Album or Song" class="form-control">
+      </p>
+
+      <div>
+
+      </div>
+    </div>
+  </div>
 </div>

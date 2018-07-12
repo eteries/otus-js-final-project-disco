@@ -1,0 +1,31 @@
+h2 {
+  margin-top: 40px;
+}
+
+form {
+  position: relative;
+}
+
+.file {
+  position: absolute;
+  left: 100%;
+  top: 20px;
+  margin-left: 40px;
+  min-width: 200px;
+}
+
+.preview-container {
+  position: relative;
+}
+
+.button-reset {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.image-box {
+  height: 200px;
+  overflow: hidden;
+
+}

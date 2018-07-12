@@ -1,0 +1,25 @@
+<div class="container">
+  <article class="album">
+    <div class="album-left">
+      <div class="image-box">
+        <img src="{{ album.image }}" width="200" alt="{{ album.title }}" *ngIf="album.image">
+      </div>
+      <p><img src="/assets/img/icon-no-image.png" width="200" alt="{{ album.title }}" *ngIf="!album.image"></p>
+      <div class="edit-album">
+        <button [routerLink]="['/album/edit', album.albumId]" class="btn btn-outline-light">Edit the album</button>
+      </div>
+    </div>
+    <div class="album-right">
+      <h1>{{ album.title }} ({{ album.year }})</h1>
+      <h3>{{ artistTitle}}</h3>
+      <h5>Tracks:</h5>
+      <ul class="track-list" *ngIf="songs">
+        <li *ngFor="let song of songs | sort: 'track'">
+          <span *ngIf="song.track">{{song.track | number: '2.0-0' }}. </span>
+          <span class="song-title">{{song.title}}</span>
+          <button type="button" [routerLink]="['/song/edit', song.id]" class="btn btn-sm btn-edit">edit</button>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>

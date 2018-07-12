@@ -1,0 +1,32 @@
+<ng-container *ngIf="songViews && songViews.length; else initial">
+  <form #songListForm="ngForm" (ngSubmit)="onSubmit(songListForm)">
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th>Artist</th>
+        <th>Song</th>
+        <th>Album</th>
+        <th>Year</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let song of songViews | textFilter: search">
+        <td>
+          <input type="checkbox" name="{{song.id}}" class="action-checkbox" [(ngModel)]="checked[song.id]" (change)="toggleItem(song.id)">
+        </td>
+        <song-list-item [song]="song"></song-list-item>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="4">
+          <button type="submit" class="btn btn-sm btn-outline-light">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</ng-container>
+<ng-template #initial>
+  It's time to add new songs
+</ng-template>

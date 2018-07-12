@@ -6,32 +6,33 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./alert-selfclosing.component.scss']
 })
 export class AlertSelfclosingComponent implements OnInit {
-    private _message: string = '';
-    private _isActive: boolean = false;
+  private _message: string = '';
 
-    @Input()
-    set message(message: string) {
-        this._message = message;
-    }
+  get message() {
+    return this._message;
+  }
 
-    @Input()
-    set isActive(isActive: boolean) {
-        this._isActive = isActive;
-        if (this._isActive) {
-            setTimeout(() => this._isActive = false, 3000)
-        }
-    }
+  @Input()
+  set message(message: string) {
+    this._message = message;
+  }
 
-    ngOnInit(): void {
-        setTimeout(() => this.isActive = false, 20000);
-    }
+  private _isActive: boolean = false;
 
-    get isActive() {
-        return this._isActive;
-    }
+  get isActive() {
+    return this._isActive;
+  }
 
-    get message() {
-        return this._message;
+  @Input()
+  set isActive(isActive: boolean) {
+    this._isActive = isActive;
+    if (this._isActive) {
+      setTimeout(() => this._isActive = false, 3000)
     }
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => this.isActive = false, 20000);
+  }
 
 }

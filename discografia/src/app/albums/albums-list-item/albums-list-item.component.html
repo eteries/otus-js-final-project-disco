@@ -1,0 +1,8 @@
+<div class="card" style="width: 14rem;">
+  <div class="img-box" *ngIf="album.image"><img class="card-img-top" src="{{ album.image }}" alt="{{ album.title }}" ></div>
+  <div class="img-box" *ngIf="!album.image"><img class="card-img-top" src="/assets/img/icon-no-image.png" alt="{{ album.title }}" ></div>
+  <a [routerLink]="['/album/view', album.id]" class="card-body">
+    <h5 class="card-title">{{ album.artist }}</h5>
+    <p class="card-text">{{ album.title }}</p>
+  </a>
+</div>

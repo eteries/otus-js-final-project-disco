@@ -4,5 +4,7 @@
                 [customstyle]="'image-drop'">
     </file-drop>
   </ng-container>
-  <div class="preview-container" [hidden]="!isLoaded"></div>
+  <div class="preview-container" [hidden]="!isLoaded">
+    <button type="button" (click)="reset()" class="btn btn-sm btn-danger button-reset">&times;</button>
+  </div>
 </div>

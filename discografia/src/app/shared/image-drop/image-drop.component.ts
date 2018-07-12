@@ -1,52 +1,66 @@
-import { Component, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
 import { UploadEvent, UploadFile, FileSystemFileEntry } from 'ngx-file-drop';
 
 @Component({
-    selector: 'image-drop',
-    templateUrl: './image-drop.component.html',
-    styleUrls: ['./image-drop.component.scss']
+  selector: 'image-drop',
+  templateUrl: './image-drop.component.html',
+  styleUrls: ['./image-drop.component.scss']
 })
-export class ImageDropComponent {
+export class ImageDropComponent implements AfterContentInit {
 
-    constructor(private elementRef: ElementRef) {}
+  @Input() initial: string = '';
+  @Output() onImageLoaded: EventEmitter<string> = new EventEmitter();
+  files: UploadFile[] = [];
+  isLoaded: boolean = false;
 
-    @Output() onImageLoaded: EventEmitter<string> = new EventEmitter();
+  constructor(private elementRef: ElementRef) {
+  }
 
-    public files: UploadFile[] = [];
-    public isLoaded: boolean = false;
+  ngAfterContentInit() {
+    this.load();
+  }
 
-    public dropped(event: UploadEvent) {
-        this.files = event.files;
-        for (const droppedFile of event.files) {
+  dropped(event: UploadEvent) {
+    this.files = event.files;
+    for (const droppedFile of event.files) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
 
-            // Is it a file?
-            if (droppedFile.fileEntry.isFile) {
-                const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-                fileEntry.file((file: File) => {
+          if (!file.type.startsWith('image/')) return;
 
-                    // Here you can access the real file
-                    console.log(droppedFile, file);
+          const img = document.createElement("img");
+          img.classList.add("preview");
 
-                    if(!file.type.startsWith('image/')) return;
-
-                    const img = document.createElement("img");
-                    img.classList.add("preview");
-
-                    const fileReader = new FileReader();
-                    fileReader.onload = () => {
-                        img.src = fileReader.result;
-                        this.elementRef.nativeElement.querySelector('.preview-container').appendChild(img);
-                        this.onImageLoaded.emit(fileReader.result);
-                        this.isLoaded = true;
-                    };
-                    fileReader.readAsDataURL(file);
-                });
-            }
-        }
+          const fileReader = new FileReader();
+          fileReader.onload = () => {
+            img.src = fileReader.result;
+            this.elementRef.nativeElement.querySelector('.preview-container').appendChild(img);
+            this.onImageLoaded.emit(fileReader.result);
+            this.isLoaded = true;
+          };
+          fileReader.readAsDataURL(file);
+        });
+      }
     }
+  }
 
-    public reset() {
-        this.isLoaded = false;
+  load() {
+    if (this.initial) {
+      const img = document.createElement("img");
+      img.src = this.initial;
+      img.classList.add("preview");
+
+      this.elementRef.nativeElement.querySelector('.preview-container').appendChild(img);
+      this.isLoaded = true;
     }
+  }
+
+  reset() {
+    this.isLoaded = false;
+    this.onImageLoaded.emit('');
+    const existingImg = this.elementRef.nativeElement.querySelector('.preview-container img');
+    if (existingImg) existingImg.parentElement.removeChild(existingImg);
+  }
 
 }
